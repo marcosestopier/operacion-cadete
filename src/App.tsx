@@ -1,10 +1,11 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import Calendar from './components/Calendar';
 import IMCCalculator from './components/IMCCalculator';
 import Checklist from './components/Checklist';
 import Simulator from './components/Simulator';
+import Requirements from './components/Requirements';
 
 export default function App() {
   return (
@@ -18,6 +19,11 @@ export default function App() {
         <Route path="/calendar" element={
           <Layout title="Calendario" showBack>
             <Calendar />
+          </Layout>
+        } />
+        <Route path="/requirements" element={
+          <Layout title="Requisitos" showBack>
+            <Requirements />
           </Layout>
         } />
         <Route path="/imc" element={

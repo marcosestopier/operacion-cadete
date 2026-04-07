@@ -22,6 +22,10 @@ export default function Layout({ children, title, showBack = false }: LayoutProp
       {/* Top App Bar */}
       <nav className="sticky top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.06)] flex items-center px-4 h-16">
         <div className="flex items-center gap-4 w-full max-w-2xl mx-auto">
+          <div className="font-headline font-extrabold text-xl tracking-tight text-primary flex-shrink-0">
+            Operación Cadete
+          </div>
+          
           {showBack && (
             <button 
               onClick={() => navigate(-1)}
@@ -30,14 +34,10 @@ export default function Layout({ children, title, showBack = false }: LayoutProp
               <ArrowLeft size={24} />
             </button>
           )}
+          
           {title && (
-            <h1 className="font-headline font-bold text-lg tracking-tight text-primary">
+            <h1 className="font-headline font-bold text-lg tracking-tight text-black truncate">
               {title}
-            </h1>
-          )}
-          {!title && !isHome && (
-             <h1 className="font-headline font-bold text-lg tracking-tight text-primary">
-              Sovereign
             </h1>
           )}
         </div>

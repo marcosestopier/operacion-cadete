@@ -5,12 +5,12 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-headline: "Manrope", "Inter", sans-serif;
 
-  --color-primary: #00450d;
+  --color-primary: #2E7D32; /* SEDENA Green */
   --color-primary-container: #1b5e20;
   --color-on-primary-container: #90d689;
   
-  --color-secondary: #4c56af;
-  --color-secondary-container: #959efd;
+  --color-secondary: #1A237E; /* SEMAR Navy */
+  --color-secondary-container: #1A237E;
   
   --color-tertiary: #503600;
   --color-tertiary-container: #6e4b00;
@@ -21,24 +21,33 @@
   --color-surface-container-low: #f2f5ec;
   --color-surface-container-lowest: #ffffff;
   
-  --color-on-surface: #191d17;
-  --color-on-surface-variant: #41493e;
+  --color-on-surface: #000000;
+  --color-on-surface-variant: #3C4043;
   --color-outline: #717a6d;
   --color-outline-variant: #c0c9bb;
 }
 
 @layer base {
   body {
-    @apply bg-surface text-on-surface font-sans antialiased;
+    @apply bg-surface text-black font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-black;
   }
 }
 
 .editorial-shadow {
-  box-shadow: 0 8px 32px rgba(25, 29, 23, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
 }
 
 .glass-card {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
+}
+
+/* Custom Navy Theme for SEMAR */
+.theme-navy {
+  --color-primary: #1A237E;
 }
