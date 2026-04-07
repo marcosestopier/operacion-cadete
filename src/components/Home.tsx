@@ -18,12 +18,13 @@ export default function Home() {
         >
           <motion.div 
             whileTap={{ scale: 0.95 }}
-            className="aspect-square rounded-xl bg-primary-container p-4 flex flex-col justify-between items-start transition-all duration-300 ease-in-out editorial-shadow cursor-pointer"
+            className="aspect-square rounded-xl bg-primary-container p-4 flex flex-col justify-between items-start transition-all duration-300 ease-in-out editorial-shadow cursor-pointer relative overflow-hidden"
           >
-            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+            <ShieldCheck className="absolute -right-4 -bottom-4 text-[100px] text-white/10 rotate-12" />
+            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center relative z-10">
               <ShieldCheck className="text-white" size={24} />
             </div>
-            <div className="space-y-0.5">
+            <div className="space-y-0.5 relative z-10">
               <p className="text-white/70 font-sans text-[8px] font-bold tracking-widest uppercase">INSTITUCIÓN</p>
               <h2 className="text-white font-headline text-xl font-bold">SEDENA</h2>
             </div>
@@ -39,12 +40,13 @@ export default function Home() {
         >
           <motion.div 
             whileTap={{ scale: 0.95 }}
-            className="aspect-square rounded-xl bg-secondary-container p-4 flex flex-col justify-between items-start transition-all duration-300 ease-in-out editorial-shadow cursor-pointer"
+            className="aspect-square rounded-xl bg-secondary-container p-4 flex flex-col justify-between items-start transition-all duration-300 ease-in-out editorial-shadow cursor-pointer relative overflow-hidden"
           >
-            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+            <Anchor className="absolute -right-4 -bottom-4 text-[100px] text-white/10 -rotate-12" />
+            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center relative z-10">
               <Anchor className="text-white" size={24} />
             </div>
-            <div className="space-y-0.5">
+            <div className="space-y-0.5 relative z-10">
               <p className="text-white/70 font-sans text-[8px] font-bold tracking-widest uppercase">INSTITUCIÓN</p>
               <h2 className="text-white font-headline text-xl font-bold">SEMAR</h2>
             </div>

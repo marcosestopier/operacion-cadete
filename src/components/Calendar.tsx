@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { CloudUpload, Dumbbell, BookOpen, Brain, Trophy, FileText, Search } from 'lucide-react';
+import { CloudUpload, Dumbbell, BookOpen, Brain, Trophy, FileText, Search, ShieldCheck, Anchor } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 type Institution = 'SEDENA' | 'SEMAR';
@@ -275,25 +275,33 @@ export default function Calendar() {
         <h2 className="font-headline text-[2.75rem] font-bold text-black leading-tight mb-4">Fechas clave</h2>
         <p className="font-sans text-black/70 text-lg max-w-md">Cronograma institucional detallado para el proceso de selección y evaluaciones.</p>
         
-        <div className="flex w-full mt-6 bg-surface-container rounded-lg p-1 gap-1">
+        <div className="relative flex w-full mt-8 bg-surface-container rounded-2xl p-1.5 gap-1 shadow-inner">
+          <motion.div
+            layoutId="activeTab"
+            className="absolute inset-y-1.5 rounded-xl bg-primary shadow-md"
+            initial={false}
+            animate={{
+              x: institution === 'SEDENA' ? 0 : 'calc(100% + 4px)',
+              width: 'calc(50% - 4px)'
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          />
           <button 
             onClick={() => setInstitution('SEDENA')}
-            className={`flex-1 py-3 px-4 rounded-md font-headline font-bold text-sm uppercase tracking-wider transition-all ${
-              institution === 'SEDENA' 
-                ? 'bg-primary text-white shadow-sm' 
-                : 'text-black/60 hover:bg-surface-variant'
+            className={`relative z-10 flex-1 py-3.5 px-4 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-colors duration-300 flex items-center justify-center gap-2 ${
+              institution === 'SEDENA' ? 'text-white' : 'text-black/60 hover:text-black'
             }`}
           >
+            <ShieldCheck size={18} />
             SEDENA
           </button>
           <button 
             onClick={() => setInstitution('SEMAR')}
-            className={`flex-1 py-3 px-4 rounded-md font-headline font-bold text-sm uppercase tracking-wider transition-all ${
-              institution === 'SEMAR' 
-                ? 'bg-primary text-white shadow-sm' 
-                : 'text-black/60 hover:bg-surface-variant'
+            className={`relative z-10 flex-1 py-3.5 px-4 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-colors duration-300 flex items-center justify-center gap-2 ${
+              institution === 'SEMAR' ? 'text-white' : 'text-black/60 hover:text-black'
             }`}
           >
+            <Anchor size={18} />
             SEMAR
           </button>
         </div>
