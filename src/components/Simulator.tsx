@@ -7,10 +7,31 @@ export default function Simulator() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (name && email) {
-      setSubmitted(true);
+      setIsSubmitting(true);
+      try {
+        const response = await fetch('https://formspree.io/f/mzdkwbve', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, email })
+        });
+        if (response.ok) {
+          setSubmitted(true);
+        } else {
+          alert('Hubo un error al enviar el formulario. Por favor intenta de nuevo.');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Hubo un error al enviar el formulario. Por favor intenta de nuevo.');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -103,10 +124,11 @@ export default function Simulator() {
         <motion.button 
           whileTap={{ scale: 0.95 }}
           type="submit"
-          className="w-full bg-primary text-white py-5 rounded-xl text-lg font-bold flex items-center justify-center gap-3 shadow-lg shadow-primary/20 hover:bg-primary-container transition-all"
+          disabled={isSubmitting}
+          className="w-full bg-primary text-white py-5 rounded-xl text-lg font-bold flex items-center justify-center gap-3 shadow-lg shadow-primary/20 hover:bg-primary-container transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <Bell size={20} />
-          NOTIFICARME
+          {isSubmitting ? 'ENVIANDO...' : 'NOTIFICARME'}
         </motion.button>
       </form>
 
