@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Analytics } from "@vercel/analytics/react";
 import Layout from './components/Layout';
 import Home from './components/Home';
 import Calendar from './components/Calendar';
@@ -48,6 +49,7 @@ export default function App() {
         } />
       </Routes>
       <OfflineNotice />
+      <Analytics />
     </Router>
   );
 }
