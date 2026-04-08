@@ -1,8 +1,34 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Anchor, Calendar, Calculator, ClipboardList, Verified, LockOpen, ChevronRight, ArrowRight, ListChecks } from 'lucide-react';
+import { ShieldCheck, Anchor, Calendar, Calculator, ClipboardList, Verified, LockOpen, ChevronRight, ArrowRight, ListChecks, Play, Share2 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function Home() {
+  const handleShare = async (e: React.MouseEvent, title: string, url: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Convocatoria ${title}`,
+          text: `Consulta la convocatoria de ${title} aquí:`,
+          url: url,
+        });
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
+    } else {
+      // Fallback: Copy to clipboard
+      try {
+        await navigator.clipboard.writeText(url);
+        alert('Enlace copiado al portapapeles');
+      } catch (err) {
+        console.error('Could not copy text: ', err);
+      }
+    }
+  };
+
   return (
     <div className="space-y-8">
       <h2 className="font-headline font-bold text-2xl text-black px-1 mb-2">Convocatorias</h2>
@@ -14,16 +40,27 @@ export default function Home() {
           href="https://drive.google.com/file/d/1lGcBWAK7xvDyseVxjZjE2maP05KE09aA/preview?usp=sharing" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="block"
+          className="block group"
         >
           <motion.div 
             whileTap={{ scale: 0.95 }}
             className="aspect-square rounded-xl bg-primary-container p-4 flex flex-col justify-between items-start transition-all duration-300 ease-in-out editorial-shadow cursor-pointer relative overflow-hidden"
           >
             <ShieldCheck className="absolute -right-4 -bottom-4 text-[100px] text-white/10 rotate-12" />
-            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center relative z-10">
-              <ShieldCheck className="text-white" size={24} />
+            
+            <div className="w-full flex justify-between items-start relative z-10">
+              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                <ShieldCheck className="text-white" size={24} />
+              </div>
+              <button 
+                onClick={(e) => handleShare(e, 'SEDENA', 'https://drive.google.com/file/d/1lGcBWAK7xvDyseVxjZjE2maP05KE09aA/preview?usp=sharing')}
+                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+                title="Compartir"
+              >
+                <Share2 size={16} />
+              </button>
             </div>
+
             <div className="space-y-0.5 relative z-10">
               <p className="text-white/70 font-sans text-[8px] font-bold tracking-widest uppercase">INSTITUCIÓN</p>
               <h2 className="text-white font-headline text-xl font-bold">SEDENA</h2>
@@ -36,16 +73,27 @@ export default function Home() {
           href="https://drive.google.com/file/d/1T37-JnTEI04J2lbIGSI_tDZx1c8w0qRr/preview?usp=sharing" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="block"
+          className="block group"
         >
           <motion.div 
             whileTap={{ scale: 0.95 }}
             className="aspect-square rounded-xl bg-secondary-container p-4 flex flex-col justify-between items-start transition-all duration-300 ease-in-out editorial-shadow cursor-pointer relative overflow-hidden"
           >
             <Anchor className="absolute -right-4 -bottom-4 text-[100px] text-white/10 -rotate-12" />
-            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center relative z-10">
-              <Anchor className="text-white" size={24} />
+            
+            <div className="w-full flex justify-between items-start relative z-10">
+              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                <Anchor className="text-white" size={24} />
+              </div>
+              <button 
+                onClick={(e) => handleShare(e, 'SEMAR', 'https://drive.google.com/file/d/1T37-JnTEI04J2lbIGSI_tDZx1c8w0qRr/preview?usp=sharing')}
+                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+                title="Compartir"
+              >
+                <Share2 size={16} />
+              </button>
             </div>
+
             <div className="space-y-0.5 relative z-10">
               <p className="text-white/70 font-sans text-[8px] font-bold tracking-widest uppercase">INSTITUCIÓN</p>
               <h2 className="text-white font-headline text-xl font-bold">SEMAR</h2>
@@ -126,6 +174,25 @@ export default function Home() {
                 <span className="font-sans font-bold text-black">Checklist de papelería</span>
               </div>
               <ArrowRight className="text-black/30" size={16} />
+            </motion.div>
+          </Link>
+
+          {/* Demo Simulator Tool */}
+          <Link to="/simulator-demo">
+            <motion.div 
+              whileTap={{ scale: 0.99 }}
+              className="bg-primary/5 rounded-xl p-5 flex items-center justify-between transition-all duration-300 ease-in-out border border-primary/20 shadow-sm"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Play className="text-primary" size={20} />
+                </div>
+                <div>
+                  <span className="font-sans font-bold text-black block">Demo del Simulador</span>
+                  <span className="text-[10px] text-primary font-bold uppercase tracking-wider">25 Preguntas • 15 Min</span>
+                </div>
+              </div>
+              <ChevronRight className="text-primary" size={20} />
             </motion.div>
           </Link>
         </div>

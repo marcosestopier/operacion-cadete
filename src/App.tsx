@@ -6,6 +6,8 @@ import IMCCalculator from './components/IMCCalculator';
 import Checklist from './components/Checklist';
 import Simulator from './components/Simulator';
 import Requirements from './components/Requirements';
+import SimulatorDemo from './components/SimulatorDemo';
+import OfflineNotice from './components/OfflineNotice';
 
 export default function App() {
   return (
@@ -41,7 +43,11 @@ export default function App() {
             <Simulator />
           </Layout>
         } />
+        <Route path="/simulator-demo" element={
+          <SimulatorDemo />
+        } />
       </Routes>
+      <OfflineNotice />
     </Router>
   );
 }
