@@ -348,39 +348,47 @@ export default function SimulatorDemo() {
               exit={{ opacity: 0, y: -20 }}
               className="bg-white rounded-3xl p-8 shadow-xl border border-zinc-100 space-y-6"
             >
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto">
+              <div className="w-16 h-16 bg-zinc-50 border border-outline rounded-2xl flex items-center justify-center text-primary mx-auto">
                 <BookOpen size={32} />
               </div>
               <div className="text-center space-y-2">
-                <h2 className="text-2xl font-headline font-bold text-black">Instrucciones del Examen</h2>
-                <p className="text-zinc-500">Lee cuidadosamente antes de comenzar.</p>
+                <h2 className="text-2xl font-headline font-bold text-zinc-900">Instrucciones del Examen</h2>
+                <p className="text-zinc-400 text-sm">Lee cuidadosamente antes de comenzar.</p>
               </div>
               
               <ul className="space-y-4 text-zinc-600">
                 <li className="flex gap-3">
-                  <CheckCircle2 className="text-primary shrink-0" size={20} />
-                  <span>El examen consta de 25 preguntas de opción múltiple.</span>
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="text-primary" size={12} />
+                  </div>
+                  <span className="text-sm">El examen consta de 25 preguntas de opción múltiple.</span>
                 </li>
                 <li className="flex gap-3">
-                  <CheckCircle2 className="text-primary shrink-0" size={20} />
-                  <span>Tienes un tiempo límite de 15 minutos.</span>
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="text-primary" size={12} />
+                  </div>
+                  <span className="text-sm">Tienes un tiempo límite de 15 minutos.</span>
                 </li>
                 <li className="flex gap-3">
-                  <CheckCircle2 className="text-primary shrink-0" size={20} />
-                  <span>Puedes navegar entre preguntas usando la barra superior.</span>
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="text-primary" size={12} />
+                  </div>
+                  <span className="text-sm">Puedes navegar entre preguntas usando la barra superior.</span>
                 </li>
                 <li className="flex gap-3">
-                  <CheckCircle2 className="text-primary shrink-0" size={20} />
-                  <span>Al finalizar, verás únicamente tu puntaje total.</span>
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="text-primary" size={12} />
+                  </div>
+                  <span className="text-sm">Al finalizar, verás únicamente tu puntaje total.</span>
                 </li>
               </ul>
 
               <button
                 onClick={() => setGameState('subject_select')}
-                className="w-full bg-primary text-white py-4 rounded-2xl font-bold text-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
+                className="w-full bg-zinc-900 text-white py-4 rounded-2xl font-bold text-sm hover:bg-black transition-all flex items-center justify-center gap-2"
               >
                 Comenzar Examen
-                <Play size={20} />
+                <Play size={16} />
               </button>
             </motion.div>
           )}
@@ -394,8 +402,8 @@ export default function SimulatorDemo() {
               className="space-y-6"
             >
               <div className="text-center space-y-2">
-                <h2 className="text-2xl font-headline font-bold text-black">¿Por qué materia quieres empezar?</h2>
-                <p className="text-zinc-500">Selecciona un bloque para ir directamente a esas preguntas.</p>
+                <h2 className="text-2xl font-headline font-bold text-zinc-900">¿Por qué materia quieres empezar?</h2>
+                <p className="text-zinc-400 text-sm">Selecciona un bloque para ir directamente a esas preguntas.</p>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -403,14 +411,14 @@ export default function SimulatorDemo() {
                   <button
                     key={subject.name}
                     onClick={() => handleSelectSubject(subject.name)}
-                    className="bg-white p-6 rounded-3xl shadow-sm border border-zinc-100 hover:border-primary/30 hover:shadow-md transition-all flex items-center gap-4 group text-left"
+                    className="minimal-card p-6 flex items-center gap-4 group text-left hover:border-primary/30"
                   >
-                    <div className={`w-12 h-12 ${subject.color} rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform`}>
+                    <div className={`w-12 h-12 ${subject.color} rounded-xl flex items-center justify-center text-white group-hover:scale-105 transition-transform`}>
                       <subject.icon size={24} />
                     </div>
                     <div>
-                      <h3 className="font-bold text-black">{subject.name}</h3>
-                      <p className="text-xs text-zinc-400">Toca para iniciar</p>
+                      <h3 className="font-bold text-zinc-900">{subject.name}</h3>
+                      <p className="micro-label">Iniciar bloque</p>
                     </div>
                   </button>
                 ))}
@@ -427,7 +435,7 @@ export default function SimulatorDemo() {
               className="space-y-4"
             >
               {/* Progress Bar */}
-              <div className="w-full h-2 bg-zinc-100 rounded-full overflow-hidden">
+              <div className="w-full h-1.5 bg-zinc-100 rounded-full overflow-hidden">
                 <motion.div 
                   className="h-full bg-primary"
                   initial={{ width: 0 }}
@@ -436,19 +444,19 @@ export default function SimulatorDemo() {
               </div>
 
               {/* Header: Timer and Progress */}
-              <div className="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-zinc-100">
-                <div className="flex items-center gap-2 text-primary font-bold">
-                  <Timer size={20} />
-                  <span className={timeLeft < 60 ? 'text-red-500 animate-pulse' : ''}>
+              <div className="flex items-center justify-between bg-white p-4 rounded-2xl border border-outline">
+                <div className="flex items-center gap-2 text-zinc-900 font-bold">
+                  <Timer size={18} className="text-zinc-400" />
+                  <span className={`text-sm ${timeLeft < 60 ? 'text-red-500 animate-pulse' : ''}`}>
                     {formatTime(timeLeft)}
                   </span>
                 </div>
-                <div className="text-sm font-bold text-zinc-400">
-                  Pregunta {currentQuestionIndex + 1} de {QUESTIONS.length}
+                <div className="micro-label">
+                  {currentQuestionIndex + 1} / {QUESTIONS.length}
                 </div>
                 <button
                   onClick={handleFinish}
-                  className="bg-zinc-900 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-black transition-colors"
+                  className="bg-zinc-900 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-black transition-colors"
                 >
                   Finalizar
                 </button>
@@ -463,32 +471,32 @@ export default function SimulatorDemo() {
                   <button
                     key={idx}
                     onClick={() => setCurrentQuestionIndex(idx)}
-                    className={`shrink-0 w-10 h-10 rounded-xl flex flex-col items-center justify-center font-bold text-sm transition-all relative ${
+                    className={`shrink-0 w-10 h-10 rounded-xl flex flex-col items-center justify-center font-bold text-xs transition-all relative ${
                       currentQuestionIndex === idx
-                        ? 'bg-primary text-white shadow-md scale-110'
+                        ? 'bg-zinc-900 text-white'
                         : answers[idx] !== undefined
-                        ? 'bg-white text-primary border-2 border-primary/30'
-                        : 'bg-white text-zinc-400 border border-zinc-100'
+                        ? 'bg-white text-zinc-900 border border-zinc-900'
+                        : 'bg-white text-zinc-300 border border-outline'
                     }`}
                   >
                     {idx + 1}
-                    <div className={`absolute -bottom-1 w-1.5 h-1.5 rounded-full ${getSubjectColor(q.subject)}`} />
+                    <div className={`absolute -bottom-1 w-1 h-1 rounded-full ${getSubjectColor(q.subject)}`} />
                   </button>
                 ))}
               </div>
 
               {/* Question Card */}
-              <div className="bg-white rounded-3xl p-8 shadow-xl border border-zinc-100 space-y-8 min-h-[400px] flex flex-col">
+              <div className="minimal-card p-8 space-y-8 min-h-[400px] flex flex-col">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 bg-zinc-100 text-zinc-500 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                    <span className="micro-label bg-zinc-50 px-2 py-1 rounded border border-outline">
                       {QUESTIONS[currentQuestionIndex].subject}
                     </span>
-                    <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-bold uppercase tracking-wider">
+                    <span className="micro-label text-primary">
                       {QUESTIONS[currentQuestionIndex].topic}
                     </span>
                   </div>
-                  <h3 className="text-xl font-headline font-bold text-black leading-tight">
+                  <h3 className="text-xl font-headline font-bold text-zinc-900 leading-tight">
                     {QUESTIONS[currentQuestionIndex].question}
                   </h3>
                 </div>
@@ -498,14 +506,14 @@ export default function SimulatorDemo() {
                     <button
                       key={idx}
                       onClick={() => handleAnswer(idx)}
-                      className={`w-full p-4 rounded-2xl text-left font-medium transition-all flex items-center gap-4 border-2 ${
+                      className={`w-full p-4 rounded-xl text-left text-sm font-medium transition-all flex items-center gap-4 border ${
                         answers[currentQuestionIndex] === idx
-                          ? 'border-primary bg-primary/5 text-primary'
-                          : 'border-zinc-50 bg-zinc-50 text-zinc-600 hover:border-zinc-200'
+                          ? 'border-primary bg-primary/[0.03] text-primary'
+                          : 'border-outline bg-white text-zinc-600 hover:border-zinc-300'
                       }`}
                     >
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold shrink-0 ${
-                        answers[currentQuestionIndex] === idx ? 'bg-primary text-white' : 'bg-white text-zinc-400'
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold shrink-0 border ${
+                        answers[currentQuestionIndex] === idx ? 'bg-primary border-primary text-white' : 'bg-zinc-50 border-outline text-zinc-400'
                       }`}>
                         {String.fromCharCode(65 + idx)}
                       </div>
@@ -514,22 +522,22 @@ export default function SimulatorDemo() {
                   ))}
                 </div>
 
-                <div className="flex justify-between pt-4">
+                <div className="flex justify-between pt-4 border-t border-outline">
                   <button
                     onClick={prevQuestion}
                     disabled={currentQuestionIndex === 0}
-                    className="flex items-center gap-2 text-zinc-400 font-bold disabled:opacity-30"
+                    className="flex items-center gap-2 text-zinc-400 text-sm font-bold disabled:opacity-30"
                   >
-                    <ChevronLeft size={20} />
+                    <ChevronLeft size={18} />
                     Anterior
                   </button>
                   <button
                     onClick={nextQuestion}
                     disabled={currentQuestionIndex === QUESTIONS.length - 1}
-                    className="flex items-center gap-2 text-primary font-bold disabled:opacity-30"
+                    className="flex items-center gap-2 text-zinc-900 text-sm font-bold disabled:opacity-30"
                   >
                     Siguiente
-                    <ChevronRight size={20} />
+                    <ChevronRight size={18} />
                   </button>
                 </div>
               </div>
@@ -541,45 +549,45 @@ export default function SimulatorDemo() {
               key="results"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-white rounded-3xl p-10 shadow-xl border border-zinc-100 text-center space-y-8"
+              className="minimal-card p-10 text-center space-y-8"
             >
               <div className="relative inline-block">
-                <div className="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto">
-                  <Trophy size={64} />
+                <div className="w-24 h-24 rounded-2xl bg-zinc-50 border border-outline flex items-center justify-center text-primary mx-auto">
+                  <Trophy size={48} />
                 </div>
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.5, type: 'spring' }}
-                  className="absolute -bottom-2 -right-2 bg-green-500 text-white p-2 rounded-full shadow-lg"
+                  className="absolute -bottom-2 -right-2 bg-zinc-900 text-white p-2 rounded-lg shadow-lg"
                 >
-                  <CheckCircle2 size={24} />
+                  <CheckCircle2 size={16} />
                 </motion.div>
               </div>
 
               <div className="space-y-2">
-                <h2 className="text-3xl font-headline font-bold text-black">Examen Finalizado</h2>
-                <p className="text-zinc-500">Has completado el demo del simulador.</p>
+                <h2 className="text-2xl font-headline font-bold text-zinc-900">Examen Finalizado</h2>
+                <p className="text-zinc-400 text-sm">Has completado el demo del simulador.</p>
               </div>
 
-              <div className="bg-zinc-50 rounded-3xl p-8 space-y-6">
+              <div className="bg-zinc-50 rounded-2xl p-8 space-y-6 border border-outline">
                 <div className="space-y-2">
-                  <p className="text-zinc-400 font-bold uppercase tracking-widest text-xs">Tu Resultado Total</p>
-                  <div className="text-6xl font-headline font-black text-primary">
-                    {score} <span className="text-2xl text-zinc-300">/ {QUESTIONS.length}</span>
+                  <p className="micro-label">Resultado Total</p>
+                  <div className="text-5xl font-headline font-bold text-zinc-900">
+                    {score} <span className="text-xl text-zinc-300">/ {QUESTIONS.length}</span>
                   </div>
                 </div>
 
-                <div className="space-y-3 pt-4 border-t border-zinc-200">
-                  <p className="text-zinc-400 font-bold uppercase tracking-widest text-[10px] text-left">Desglose por materia</p>
+                <div className="space-y-3 pt-4 border-t border-outline">
+                  <p className="micro-label text-left">Desglose por materia</p>
                   <div className="grid grid-cols-1 gap-2">
                     {Object.entries(getSubjectStats()).map(([subject, stat]) => (
-                      <div key={subject} className="flex items-center justify-between bg-white p-3 rounded-xl border border-zinc-100">
+                      <div key={subject} className="flex items-center justify-between bg-white p-3 rounded-xl border border-outline">
                         <div className="flex items-center gap-3">
-                          <div className={`w-2 h-2 rounded-full ${getSubjectColor(subject)}`} />
-                          <span className="text-sm font-bold text-zinc-700">{subject}</span>
+                          <div className={`w-1.5 h-1.5 rounded-full ${getSubjectColor(subject)}`} />
+                          <span className="text-xs font-bold text-zinc-700">{subject}</span>
                         </div>
-                        <span className="text-sm font-mono font-bold text-primary">
+                        <span className="text-xs font-mono font-bold text-zinc-900">
                           {stat.correct} / {stat.total}
                         </span>
                       </div>
@@ -587,7 +595,7 @@ export default function SimulatorDemo() {
                   </div>
                 </div>
 
-                <p className="text-sm font-medium text-zinc-500 mt-2">
+                <p className="text-xs font-medium text-zinc-500 mt-2">
                   {score >= 20 ? '¡Excelente desempeño!' : score >= 15 ? 'Buen trabajo, sigue practicando.' : 'Sigue estudiando para mejorar.'}
                 </p>
               </div>
@@ -600,13 +608,13 @@ export default function SimulatorDemo() {
                     setTimeLeft(900);
                     setCurrentQuestionIndex(0);
                   }}
-                  className="w-full bg-primary text-white py-4 rounded-2xl font-bold hover:bg-primary/90 transition-all"
+                  className="w-full bg-zinc-900 text-white py-4 rounded-xl font-bold text-sm hover:bg-black transition-all"
                 >
                   Reintentar Demo
                 </button>
                 <button
                   onClick={() => window.history.back()}
-                  className="w-full bg-zinc-100 text-zinc-600 py-4 rounded-2xl font-bold hover:bg-zinc-200 transition-all"
+                  className="w-full bg-white text-zinc-600 border border-outline py-4 rounded-xl font-bold text-sm hover:bg-zinc-50 transition-all"
                 >
                   Volver al Inicio
                 </button>
